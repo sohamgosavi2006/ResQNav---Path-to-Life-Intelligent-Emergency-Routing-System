@@ -46,7 +46,12 @@ ResQNav introduces a **real-time, AI-powered traffic coordination system** that:
 
 ---
 
-Twilio SMS Sent to our Server Mobile Number from Twilio Number which informs us where the incident has occured
+Dashboard : Emergency Response System Interface -> 
+
+<img width="1536" height="960" alt="Screenshot 2026-04-08 at 11 04 45 PM" src="https://github.com/user-attachments/assets/b294316a-b2ea-4bb7-8ab5-8c93fd10c295" />
+
+
+Twilio SMS Sent to our Server Mobile Number from Twilio Number which informs us where the incident has occured ->
 
 <img width="414" height="896" alt="IMG_4920" src="https://github.com/user-attachments/assets/1131fc7e-ab8b-4794-bd0c-c3d41f8be485" />
 
