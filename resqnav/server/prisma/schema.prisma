@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Incident {
+  id          Int      @id @default(autoincrement())
+  type        String
+  location    String
+  lat         Float?
+  lng         Float?
+  description String?
+  severity    String   @default("moderate")
+  reportedBy  String   @default("anonymous")
+  verified    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  alerts      Alert[]
+}
+
+model Alert {
+  id           Int      @id @default(autoincrement())
+  incidentId   Int
+  incident     Incident @relation(fields: [incidentId], references: [id])
+  services     String   // Comma separated services or JSON string
+  location     String
+  message      String
+  dispatchedAt DateTime @default(now())
+  status       String   @default("dispatched")
+}
+
+model User {
+  id          Int      @id @default(autoincrement())
+  email       String   @unique
+  password    String
+  name        String?
+  role        String   @default("commuter")
+  department  String?
+  badgeNumber String?
+  verified    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model VerificationLog {
+  id              Int      @id @default(autoincrement())
+  incidentId      Int
+  status          String   // e.g., "pending", "validated", "fake"
+  blockchainHash  String?
+  confidenceScore Float?
+  consensusCount  Int      @default(1)
+  timestamp       DateTime @default(now())
+}
+
+model SMSLog {
+  id          Int      @id @default(autoincrement())
+  incidentId  Int?
+  phoneNumber String
+  message     String
+  status      String   // e.g., "sent", "queued", "failed"
+  provider    String   @default("Twilio")
+  timestamp   DateTime @default(now())
+}
